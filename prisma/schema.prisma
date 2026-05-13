@@ -1,0 +1,52 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+ 
+}
+
+enum Plan {
+  FREE
+  PRO
+}
+
+enum Difficulty {
+  EASY
+  MEDIUM
+  HARD
+}
+
+model User {
+  id          String        @id @default(cuid())
+  name        String?
+  email       String        @unique
+  password    String
+  plan        Plan          @default(FREE)
+  credits     Int           @default(5)
+  codeReviews CodeReview[]
+  practiceLog PracticeLog[]
+  createdAt   DateTime      @default(now())
+}
+
+model CodeReview {
+  id        String   @id @default(cuid())
+  code      String
+  language  String
+  feedback  String
+  userId    String
+  user      User     @relation(fields: [userId], references: [id])
+  createdAt DateTime @default(now())
+}
+
+model PracticeLog {
+  id         String     @id @default(cuid())
+  topic      String
+  difficulty Difficulty
+  question   String
+  answer     String?
+  userId     String
+  user       User       @relation(fields: [userId], references: [id])
+  solvedAt   DateTime   @default(now())
+}
