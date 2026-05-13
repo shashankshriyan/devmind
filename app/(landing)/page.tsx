@@ -1,17 +1,13 @@
 import Link from "next/link";
 import { auth } from "@/lib/auth";
 import { redirect } from "next/navigation";
-import Navbar from "@/components/landing/Navbar";
-import Footer from "@/components/landing/Footer";
 
 export default async function LandingPage() {
   const session = await auth();
   if (session) redirect("/dashboard");
 
   return (
-    <div className="min-h-screen bg-background">
-      <Navbar />
-
+    <>
       {/* Hero */}
       <section className="flex flex-col items-center justify-center text-center px-4 py-24">
         <div className="inline-flex items-center gap-2 bg-primary/10 text-primary text-xs font-medium px-3 py-1 rounded-full mb-6">
@@ -88,9 +84,7 @@ export default async function LandingPage() {
       {/* How It Works */}
       <section className="px-6 py-20">
         <div className="max-w-4xl mx-auto">
-          <h2 className="text-3xl font-bold text-center mb-4">
-            How It Works
-          </h2>
+          <h2 className="text-3xl font-bold text-center mb-4">How It Works</h2>
           <p className="text-muted-foreground text-center mb-12">
             Get started in minutes
           </p>
@@ -99,8 +93,7 @@ export default async function LandingPage() {
               {
                 step: "01",
                 title: "Create Free Account",
-                description:
-                  "Sign up in seconds — no credit card required.",
+                description: "Sign up in seconds — no credit card required.",
               },
               {
                 step: "02",
@@ -137,8 +130,8 @@ export default async function LandingPage() {
         <div className="max-w-4xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
             {[
-              { value: "10+", label: "Languages Supported" },
-              { value: "3",   label: "AI Powered Tools" },
+              { value: "10+",  label: "Languages Supported" },
+              { value: "3",    label: "AI Powered Tools" },
               { value: "100%", label: "Free to Use" },
             ].map((stat) => (
               <div key={stat.label}>
@@ -152,7 +145,7 @@ export default async function LandingPage() {
         </div>
       </section>
 
-      {/* CTA */}
+
       <section className="px-6 py-24">
         <div className="max-w-2xl mx-auto text-center">
           <h2 className="text-3xl font-bold mb-4">
@@ -170,8 +163,6 @@ export default async function LandingPage() {
           </Link>
         </div>
       </section>
-
-      <Footer />
-    </div>
+    </>
   );
 }

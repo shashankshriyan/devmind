@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import { LogIn, UserPlus } from "lucide-react";
 
 export default function LoginPage() {
   const router = useRouter();
@@ -57,7 +58,7 @@ export default function LoginPage() {
       <Card className="w-full max-w-md">
         <CardHeader className="space-y-1">
           <div className="flex items-center gap-2 mb-2">
-            <span className="text-2xl">🧠</span>
+          <UserPlus className="h-5 w-5 text-primary" />
             <span className="text-xl font-bold">DevMind</span>
           </div>
           <CardTitle className="text-2xl">Welcome back</CardTitle>

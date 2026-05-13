@@ -157,7 +157,7 @@ export default function PracticePage() {
                 </div>
                 <button
                     onClick={() => showForm && !editId ? handleCancel() : (setShowForm(true), setEditId(null), setForm(EMPTY_FORM))}
-                    className="bg-blue-600 text-white text-sm font-medium px-4 py-2 rounded-md hover:bg-blue-700 transition"
+                    className="bg-blue-900 text-white text-sm font-medium px-4 py-2 rounded-md hover:bg-blue-700 transition"
                 >
                     {showForm ? "✕ Cancel" : "+ Log Problem"}
                 </button>
@@ -285,7 +285,7 @@ export default function PracticePage() {
                                 <div className="flex items-center gap-2">
                                     <button
                                         onClick={() => setExpanded(expanded === log.id ? null : log.id)}
-                                        className="text-xs font-medium bg-blue-600 text-white px-3 py-1.5 rounded-md hover:bg-blue-700 transition"
+                                        className="text-xs font-medium bg-blue-900 text-white px-3 py-1.5 rounded-md hover:bg-blue-700 transition"
                                     >
                                         {expanded === log.id ? "▲ Hide" : "▼ View"}
                                     </button>
@@ -298,7 +298,7 @@ export default function PracticePage() {
                                     <button
                                         onClick={() => setConfirmId(log.id)}
                                         disabled={deleting === log.id}
-                                        className="text-xs font-medium bg-red-600 text-white px-3 py-1.5 rounded-md hover:bg-red-700 transition disabled:opacity-50"
+                                        className="text-xs font-medium bg-red-700 text-white px-3 py-1.5 rounded-md hover:bg-red-700 transition disabled:opacity-50"
                                     >
                                         {deleting === log.id ? "Deleting..." : "🗑 Delete"}
                                     </button>
