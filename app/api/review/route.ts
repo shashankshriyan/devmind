@@ -1,9 +1,9 @@
 import { NextRequest, NextResponse } from "next/server";
-import { GoogleGenerativeAI } from "@google/generative-ai";
+import Groq from "groq-sdk";
 import { auth } from "@/lib/auth";
 import prisma from "@/lib/prisma";
 
-const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY!);
+const groq = new Groq({ apiKey: process.env.GROQ_API_KEY });
 
 export async function POST(req: NextRequest) {
   try {
@@ -20,9 +20,6 @@ export async function POST(req: NextRequest) {
         { status: 400 }
       );
     }
-
-   
-    const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash" });
 
     const prompt = `You are an expert code reviewer. Review the following ${language} code and provide feedback in this exact format:
 
@@ -48,10 +45,15 @@ Here is the code to review:
 ${code}
 \`\`\``;
 
-    const result = await model.generateContent(prompt);
-    const feedback = result.response.text();
+    const result = await groq.chat.completions.create({
+      model: "llama-3.3-70b-versatile",
+      messages: [{ role: "user", content: prompt }],
+      max_tokens: 2048,
+    });
 
-    // Save to database
+    const feedback = result.choices[0].message.content || "";
+
+
     await prisma.codeReview.create({
       data: {
         code,
@@ -62,10 +64,10 @@ ${code}
     });
 
     return NextResponse.json({ feedback }, { status: 200 });
- } catch (error) {
+  } catch (error) {
     console.error("Review error:", error);
     return NextResponse.json(
-      { error: error instanceof Error ? error.message : String(error) },  // ← this
+      { error: error instanceof Error ? error.message : "Something went wrong" },
       { status: 500 }
     );
   }
