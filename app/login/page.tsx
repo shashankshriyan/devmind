@@ -1,24 +1,29 @@
 "use client";
 
-import { useState } from "react";
+import { Suspense, useState } from "react";
 import { signIn } from "next-auth/react";
 import { useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
-import { LogIn, UserPlus } from "lucide-react";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { LogIn } from "lucide-react";
 
-export default function LoginPage() {
+
+function LoginForm() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const registered = searchParams.get("registered");
 
-  const [formData, setFormData] = useState({
-    email: "",
-    password: "",
-  });
+  const [formData, setFormData] = useState({ email: "", password: "" });
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
@@ -43,7 +48,6 @@ export default function LoginPage() {
         return;
       }
 
-   
       router.push("/dashboard");
       router.refresh();
     } catch (err) {
@@ -58,13 +62,11 @@ export default function LoginPage() {
       <Card className="w-full max-w-md">
         <CardHeader className="space-y-1">
           <div className="flex items-center gap-2 mb-2">
-          <UserPlus className="h-5 w-5 text-primary" />
+            <LogIn className="h-5 w-5 text-primary" />
             <span className="text-xl font-bold">DevMind</span>
           </div>
           <CardTitle className="text-2xl">Welcome back</CardTitle>
-          <CardDescription>
-            Sign in to your DevMind account
-          </CardDescription>
+          <CardDescription>Sign in to your DevMind account</CardDescription>
         </CardHeader>
 
         <CardContent>
@@ -124,12 +126,30 @@ export default function LoginPage() {
         <CardFooter className="justify-center">
           <p className="text-sm text-muted-foreground">
             Don&apos;t have an account?{" "}
-            <Link href="/register" className="text-primary font-medium hover:underline">
+            <Link
+              href="/register"
+              className="text-primary font-medium hover:underline"
+            >
               Sign up
             </Link>
           </p>
         </CardFooter>
       </Card>
     </div>
+  );
+}
+
+
+export default function LoginPage() {
+  return (
+    <Suspense
+      fallback={
+        <div className="min-h-screen flex items-center justify-center">
+          <p className="text-muted-foreground">Loading...</p>
+        </div>
+      }
+    >
+      <LoginForm />
+    </Suspense>
   );
 }

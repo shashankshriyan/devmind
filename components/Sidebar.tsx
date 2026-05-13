@@ -88,7 +88,7 @@ export default function Sidebar({ user }: SidebarProps) {
         <Button
           variant="ghost"
           className="w-full justify-start gap-3 text-muted-foreground"
-          onClick={() => signOut({ callbackUrl: "/login" })}
+          onClick={() => signOut({ callbackUrl: "/" })}
         >
           <LogOut className="h-4 w-4" />
           Sign Out
