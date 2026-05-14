@@ -151,7 +151,7 @@ export default function InterviewPrepPage() {
         <div className="space-y-1">
           <p className="text-xs text-transparent font-medium">Action</p>
           <Button onClick={handleGenerate} disabled={loading}>
-            {loading ? "Generating..." : "🎯 Generate Question"}
+            {loading ? "Generating..." : " Generate Question"}
           </Button>
         </div>
       </div>
@@ -194,7 +194,7 @@ export default function InterviewPrepPage() {
           <div className="border-t p-4 flex items-center gap-3">
             {saved ? (
               <p className="text-sm text-green-600 font-medium">
-                ✅ Saved to practice log!
+                 Saved to practice log!
               </p>
             ) : (
               <>
@@ -203,14 +203,14 @@ export default function InterviewPrepPage() {
                   disabled={saving}
                   className="bg-green-600 hover:bg-green-700 text-white"
                 >
-                  {saving ? "Saving..." : "✅ Mark as Solved"}
+                  {saving ? "Saving..." : " Mark as Solved"}
                 </Button>
                 <Button
                   variant="outline"
                   onClick={handleGenerate}
                   disabled={loading}
                 >
-                  ⏭️ Skip — Next Question
+                   Skip — Next Question
                 </Button>
               </>
             )}

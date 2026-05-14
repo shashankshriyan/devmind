@@ -11,7 +11,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import ReactMarkdown from "react-markdown";
-
+import { Search, Loader2, Code2 } from "lucide-react";
 
 const MonacoEditor = dynamic(() => import("@monaco-editor/react"), {
   ssr: false,
@@ -74,7 +74,6 @@ export default function CodeReviewPage() {
 
   return (
     <div className="p-8 h-full">
-   
       <div className="mb-6">
         <h1 className="text-3xl font-bold">Code Review</h1>
         <p className="text-muted-foreground mt-1">
@@ -96,16 +95,24 @@ export default function CodeReviewPage() {
           </SelectContent>
         </Select>
 
-        <Button onClick={handleReview} disabled={loading}>
-          {loading ? "Reviewing..." : "🔍 Review Code"}
+        <Button onClick={handleReview} disabled={loading} className="gap-2">
+          {loading ? (
+            <>
+              <Loader2 className="w-4 h-4 animate-spin" />
+              Reviewing...
+            </>
+          ) : (
+            <>
+              <Search className="w-4 h-4" />
+              Review Code
+            </>
+          )}
         </Button>
 
         {error && <p className="text-sm text-red-500">{error}</p>}
       </div>
 
-
       <div className="grid grid-cols-2 gap-6 h-[calc(100vh-280px)]">
-   
         <div className="border rounded-lg overflow-hidden">
           <MonacoEditor
             height="100%"
@@ -123,11 +130,12 @@ export default function CodeReviewPage() {
           />
         </div>
 
-    
         <div className="border rounded-lg p-6 overflow-y-auto bg-card">
           {!feedback && !loading && (
             <div className="h-full flex flex-col items-center justify-center text-center">
-              <span className="text-5xl mb-4">🔍</span>
+              <div className="w-14 h-14 rounded-xl bg-primary/10 flex items-center justify-center mb-4">
+                <Code2 className="w-7 h-7 text-primary" />
+              </div>
               <h3 className="font-semibold text-lg mb-2">Ready to Review</h3>
               <p className="text-muted-foreground text-sm">
                 Paste your code on the left and click Review Code
@@ -137,7 +145,9 @@ export default function CodeReviewPage() {
 
           {loading && (
             <div className="h-full flex flex-col items-center justify-center text-center">
-              <span className="text-5xl mb-4 animate-pulse">🤔</span>
+              <div className="w-14 h-14 rounded-xl bg-primary/10 flex items-center justify-center mb-4">
+                <Loader2 className="w-7 h-7 text-primary animate-spin" />
+              </div>
               <h3 className="font-semibold text-lg mb-2">Reviewing...</h3>
               <p className="text-muted-foreground text-sm">
                 AI is analyzing your code
