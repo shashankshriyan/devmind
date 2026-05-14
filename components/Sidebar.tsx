@@ -36,15 +36,17 @@ export default function Sidebar({ user }: SidebarProps) {
 
   return (
     <div className="w-64 border-r bg-card flex flex-col h-full">
-      {/* Logo */}
+   
       <div className="p-6 border-b">
         <div className="flex items-center gap-2">
-          <span className="text-2xl">🧠</span>
+          <div className="w-7 h-7 rounded-lg bg-primary flex items-center justify-center">
+            <BrainCircuit className="w-4 h-4 text-primary-foreground" />
+          </div>
           <span className="text-xl font-bold">DevMind</span>
         </div>
       </div>
 
-      {/* Nav Links */}
+    
       <nav className="flex-1 p-4 space-y-1">
         {navItems.map((item) => {
           const Icon = item.icon;
@@ -68,9 +70,9 @@ export default function Sidebar({ user }: SidebarProps) {
         })}
       </nav>
 
-      {/* User Info + Logout */}
+     
       <div className="p-4 border-t space-y-3">
-        {/* Plan Badge */}
+    
         <div className="flex items-center gap-2 px-3 py-2 rounded-md bg-accent">
           <Crown className="h-4 w-4 text-yellow-500" />
           <span className="text-xs font-medium">
@@ -78,13 +80,13 @@ export default function Sidebar({ user }: SidebarProps) {
           </span>
         </div>
 
-        {/* User email */}
+      
         <div className="px-3">
           <p className="text-sm font-medium truncate">{user?.name}</p>
           <p className="text-xs text-muted-foreground truncate">{user?.email}</p>
         </div>
 
-        {/* Logout */}
+      
         <Button
           variant="ghost"
           className="w-full justify-start gap-3 text-muted-foreground"
