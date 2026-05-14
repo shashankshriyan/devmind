@@ -224,7 +224,7 @@ export default function PracticePage() {
               Cancel
             </button>
             <button onClick={handleAddSubmit} disabled={submitting || !addForm.topic || !addForm.question}
-              className="flex items-center gap-2 bg-blue-600 text-white text-sm font-medium px-6 py-2 rounded-md  transition disabled:opacity-50">
+              className="flex items-center gap-2 bg-blue-900 text-white text-sm font-medium px-6 py-2 rounded-md  transition disabled:opacity-50">
               {submitting ? <><Loader2 className="w-4 h-4 animate-spin" /> Saving...</> : <><CheckCircle2 className="w-4 h-4" /> Save Log</>}
             </button>
           </div>
