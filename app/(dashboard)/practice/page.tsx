@@ -7,6 +7,7 @@ import {
   Plus, X, CheckCircle2, ClipboardList,
   HelpCircle, Loader2,
 } from "lucide-react";
+import ReactMarkdown from "react-markdown";
 
 const MonacoEditor = dynamic(() => import("@monaco-editor/react"), {
   ssr: false,
@@ -53,7 +54,7 @@ export default function PracticePage() {
   const [showAddForm, setShowAddForm] = useState(false);
   const [editorLanguage, setEditorLanguage] = useState("javascript");
 
- 
+
   const [editId, setEditId] = useState<string | null>(null);
   const [editForm, setEditForm] = useState(EMPTY_FORM);
   const [editLanguage, setEditLanguage] = useState("javascript");
@@ -77,7 +78,7 @@ export default function PracticePage() {
       question: log.question,
       answer: log.answer || "",
     });
-    setExpanded(null); 
+    setExpanded(null);
   };
 
   const handleEditCancel = () => {
@@ -135,7 +136,7 @@ export default function PracticePage() {
 
   return (
     <div className="p-8">
-     
+
       {confirmId && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
           <div className="bg-card border rounded-xl p-6 shadow-xl w-full max-w-sm mx-4">
@@ -158,7 +159,7 @@ export default function PracticePage() {
         </div>
       )}
 
-      
+
       <div className="flex items-center justify-between mb-6">
         <div>
           <h1 className="text-3xl font-bold">Practice Log</h1>
@@ -172,7 +173,7 @@ export default function PracticePage() {
         </button>
       </div>
 
-    
+
       {showAddForm && (
         <div className="border rounded-lg p-6 bg-card mb-6 space-y-4">
           <h2 className="font-semibold text-lg flex items-center gap-2">
@@ -231,7 +232,7 @@ export default function PracticePage() {
         </div>
       )}
 
-    
+
       {logs.length === 0 ? (
         <div className="text-center py-20 border rounded-lg">
           <div className="w-14 h-14 rounded-xl bg-primary/10 flex items-center justify-center mx-auto mb-4">
@@ -245,7 +246,7 @@ export default function PracticePage() {
           {logs.map((log) => (
             <div key={log.id} className="border rounded-lg bg-card overflow-hidden">
 
-             
+
               {editId !== log.id && (
                 <>
                   <div className="flex items-center justify-between p-5">
@@ -277,12 +278,14 @@ export default function PracticePage() {
                   </div>
 
                   <div className="px-5 pb-4">
-                    <p className="text-sm text-muted-foreground line-clamp-2">{log.question}</p>
+                    <div className="text-sm text-muted-foreground line-clamp-2 prose prose-sm dark:prose-invert max-w-none">
+                      <ReactMarkdown>{log.question}</ReactMarkdown>
+                    </div>
                   </div>
                 </>
               )}
 
-           
+
               {editId === log.id && (
                 <div className="p-6 space-y-4">
                   <h2 className="font-semibold text-lg flex items-center gap-2">
@@ -341,14 +344,16 @@ export default function PracticePage() {
                 </div>
               )}
 
-             
+
               {expanded === log.id && editId !== log.id && (
                 <div className="px-5 pb-6 border-t pt-4 space-y-4">
                   <div>
                     <h3 className="font-semibold text-sm mb-2 flex items-center gap-1.5">
                       <HelpCircle className="w-4 h-4 text-muted-foreground" /> Question
                     </h3>
-                    <p className="text-sm bg-muted rounded-md p-3">{log.question}</p>
+                    <div className="text-sm bg-muted rounded-md p-3 prose prose-sm dark:prose-invert max-w-none">
+                      <ReactMarkdown>{log.question}</ReactMarkdown>
+                    </div>
                   </div>
                   {log.answer && (
                     <div>
