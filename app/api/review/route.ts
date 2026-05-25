@@ -23,27 +23,7 @@ export async function POST(req: NextRequest) {
 
     const prompt = `You are an expert code reviewer. Review the following ${language} code and provide feedback in this exact format:
 
-## ✅ What's Good
-- List what the code does well
-
-## ❌ Bugs Found
-- List any bugs or errors found
-
-## 💡 Improvements
-- List specific improvements
-
-## ⚡ Performance
-- List any performance issues
-
-## 📝 Revised Code
-\`\`\`${language}
-// Provide improved version of the code here
-\`\`\`
-
-Here is the code to review:
-\`\`\`${language}
-${code}
-\`\`\``;
+`;
 
     const result = await groq.chat.completions.create({
       model: "llama-3.3-70b-versatile",
