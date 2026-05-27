@@ -20,7 +20,6 @@ export async function POST(req: NextRequest) {
       return NextResponse.json(
         { error: "Topic, difficulty and type are required" },
         { status: 400 }
-
       );
     }
 
@@ -28,10 +27,29 @@ export async function POST(req: NextRequest) {
 
 Respond in this exact format:
 
-`;
+## ❓ Question
+Write the question here clearly
+
+## 📝 Example
+Show an input/output example if applicable
+
+## 💡 Hint
+Give a helpful hint without giving away the answer
+
+## ✅ Solution Approach
+Explain the approach to solve it step by step
+
+## 💻 Code Solution
+\`\`\`
+Write the code solution here
+\`\`\`
+
+## ⏱️ Time & Space Complexity
+- Time: O(?)
+- Space: O(?)`;
 
     const result = await groq.chat.completions.create({
-      model: "llama-3.3-70b-versatile",
+        model: "llama-3.3-70b-versatile",
       messages: [{ role: "user", content: prompt }],
       max_tokens: 1024,
     });
@@ -46,10 +64,6 @@ Respond in this exact format:
       { status: 500 }
     );
   }
-}
-
-export const GET = async () => {
-
 }
 
 
